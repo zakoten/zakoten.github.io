@@ -111,7 +111,7 @@
   .person .ln:hover{text-decoration:underline}
 
   /* three cards */
-  .cards3{display:grid;grid-template-columns:1.15fr 1fr 1fr;gap:18px;margin-top:40px}
+  .cards3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px;margin-top:40px}
   @media(max-width:860px){.cards3{grid-template-columns:1fr}}
   .fcard{border:1px solid var(--line2);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;background:#fff}
   .fcard .top{position:relative;min-height:220px;background:linear-gradient(145deg,#2f574f,#16302b)}
@@ -311,14 +311,13 @@
       </div>
 
       <div class="cards3">
-        <div class="fcard">
+        <div class="fcard light">
           <div class="top">
             <img src="https://picsum.photos/seed/operators-team/800/700" alt="" loading="lazy" width="800" height="700">
-            <div class="cap">
-              <div class="k">The playbook</div>
-              <h3>The playbook</h3>
-              <p>How to find, launch and run a location, in the order the team does it. The same steps took the company from a few sites in 2019 to 7 cities.</p>
-            </div>
+          </div>
+          <div class="body">
+            <h3>The playbook</h3>
+            <div class="desc">How to find, launch and run a location, in the order the team does it. The same steps took the company from a few sites in 2019 to 7 cities.</div>
           </div>
         </div>
         <div class="fcard light">
