@@ -506,10 +506,7 @@
     </div>
   </section>
   <section id="praise" aria-label="Recognition">
-  <blockquote class="pull">
-    <p>“The best hire of 2025.”</p>
-    <cite>Manager, ELIS Innovation Hub</cite>
-  </blockquote>
+  <p class="praise-kicker">Recognition</p>
   <p class="praise-ctx">Work delivered with ELIS Innovation Hub, Link Campus University and Lazio Innova, with a collaborative piece exhibited at the Venice Biennale 2025.</p>
 </section>
 <section id="more">
@@ -759,10 +756,8 @@ a,button,summary,.flip{touch-action:manipulation}
 #passions{display:none}
 nav.top a[href="#passions"]{display:none}
 #praise{text-align:center}
-#praise .pull{margin:0}
-#praise .pull p{font-family:var(--disp);font-weight:700;font-size:clamp(28px,4.6vw,46px);letter-spacing:-.015em;line-height:1.1;max-width:20ch;margin:0 auto;color:var(--ink)}
-#praise .pull cite{display:block;margin-top:16px;font-family:var(--mono);font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);font-style:normal}
-#praise .praise-ctx{margin:22px auto 0;max-width:56ch;color:var(--muted);font-size:14.5px}
+#praise .praise-kicker{font-family:var(--mono);font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:0}
+#praise .praise-ctx{margin:16px auto 0;max-width:34ch;color:var(--ink);font-family:var(--disp);font-weight:600;font-size:clamp(21px,3vw,30px);letter-spacing:-.015em;line-height:1.28}
 #builds .track{font-family:var(--disp);font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:42px 0 18px}
 .proto-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
 @media(max-width:720px){.proto-grid{grid-template-columns:1fr}}
@@ -829,6 +824,6 @@ if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').match
 if(!('IntersectionObserver'in window))return;
 document.documentElement.classList.add('reveal-on');
 var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:0.12,rootMargin:'0px 0px -40px 0px'});
-document.querySelectorAll('#work .case,#praise .pull,#praise .praise-ctx,#more .more-item,#ai .ai-card,#writing .pub,#about .about-grid,#builds .proto,#builds .pixel-board').forEach(function(el){el.classList.add('reveal');io.observe(el);});
+document.querySelectorAll('#work .case,#praise .praise-kicker,#praise .praise-ctx,#more .more-item,#ai .ai-card,#writing .pub,#about .about-grid,#builds .proto,#builds .pixel-board').forEach(function(el){el.classList.add('reveal');io.observe(el);});
 }catch(e){}})();</script>
 </body></html>
