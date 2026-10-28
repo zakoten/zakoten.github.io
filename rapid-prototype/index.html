@@ -1,0 +1,581 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Operators Academy — rapid prototype</title>
+<meta name="description" content="Anonymized landing-page concept designed in under 6 hours as a rapid-prototyping exercise.">
+<meta name="theme-color" content="#284e4c">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<style>
+  :root{
+    --green:#284e4c; --green-h:#1d3b39; --deep:#14312d;
+    --ink:#0a0a0a; --muted:#56605f; --paper:#fff; --cream:#f5f1e8;
+    --line:#e7e4dc; --line2:#e7e7e8; --grey:#f6f5f2;
+    --sans:"Inter",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+    --maxw:1150px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth;scroll-padding-top:120px}
+  body{margin:0;font-family:var(--sans);color:var(--ink);background:var(--paper);
+    font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  img{max-width:100%;display:block}
+  h1,h2,h3{margin:0;letter-spacing:-.02em;font-weight:800}
+  p{margin:0}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding-inline:24px}
+  .muted{color:var(--muted)}
+  .eyebrow{font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+
+  /* prototype banner */
+  .protobar{background:var(--deep);color:#dfe7e4;font-size:12.5px;letter-spacing:.02em;
+    text-align:center;padding:8px 16px;font-weight:500}
+  .protobar b{color:#fff;font-weight:700}
+
+  /* header */
+  header.site{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.88);
+    backdrop-filter:blur(8px);border-bottom:1px solid var(--line2)}
+  .bar{display:flex;align-items:center;justify-content:space-between;gap:16px;
+    max-width:var(--maxw);margin:0 auto;padding:14px 24px}
+  .logo{font-weight:800;font-size:18px;letter-spacing:-.02em}
+  .logo span{color:var(--muted);font-weight:600}
+  nav.top{display:flex;align-items:center;gap:22px}
+  nav.top a.navlink{font-size:14px;font-weight:500;text-decoration:none;color:var(--ink)}
+  nav.top a.navlink:hover{color:var(--green)}
+  @media(max-width:720px){nav.top a.navlink{display:none}}
+
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    font-family:var(--sans);font-size:16px;font-weight:600;line-height:1;cursor:pointer;
+    border:1px solid transparent;border-radius:16px;padding:16px 26px;text-decoration:none;
+    transition:background .15s,transform .05s}
+  .btn:active{transform:translateY(1px)}
+  .btn-primary{background:var(--green);color:#fff}
+  .btn-primary:hover{background:var(--green-h)}
+  .btn-sm{padding:12px 20px;font-size:14px;border-radius:14px}
+  .btn-inverse{background:#fff;color:var(--deep)}
+  .btn-inverse:hover{background:#eef3f1}
+  .btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--line2)}
+  .btn-ghost:hover{border-color:var(--green);color:var(--green)}
+  .btn[disabled]{opacity:.6;pointer-events:none}
+
+  section{padding-block:72px}
+  .lead{font-size:18px;line-height:1.56;color:var(--muted);max-width:40ch}
+
+  /* hero */
+  .hero{padding-top:64px;padding-bottom:64px}
+  .hero-row{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:stretch}
+  @media(max-width:860px){.hero-row{grid-template-columns:1fr;gap:36px}}
+  .brandlock{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+  .brandlock .el{font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+  .chip-logo{display:inline-flex;align-items:center;gap:7px;height:26px;padding:0 10px;border:1px solid var(--line2);border-radius:8px;background:#fafafa}
+  .chip-logo .dot{width:12px;height:12px;border-radius:3px}
+  .chip-logo .ph{width:48px;height:7px;border-radius:3px;background:#c7ccca}
+  h1.display{font-size:clamp(40px,6.2vw,60px);font-weight:800;line-height:1.03;letter-spacing:-.035em}
+  .cta-note{font-size:14px;color:var(--muted);margin-top:4px}
+  .scale-link{display:inline-block;margin-top:16px;font-size:17px;font-weight:500;color:var(--ink);text-underline-offset:3px}
+  .hero-copy > *+*{margin-top:22px}
+
+  .hero-media{position:relative;border-radius:16px;overflow:hidden;min-height:360px;
+    background:linear-gradient(145deg,#2f574f,#16302b);}
+  .hero-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .prop-card{position:absolute;left:20px;top:20px;right:20px;background:#fff;border-radius:14px;
+    padding:14px 16px 12px;box-shadow:0 1px 1px rgba(16,32,31,.08),0 12px 16px rgba(16,32,31,.16)}
+  .prop-card .pcl{display:flex;align-items:center;gap:7px;font-weight:700;font-size:12px;color:var(--green)}
+  .prop-card .pcl .m{width:14px;height:14px;border-radius:4px;background:var(--green)}
+  .prop-card h4{font-size:14px;margin:8px 0 2px;font-weight:700;letter-spacing:0}
+  .prop-card .sub{font-size:11.5px;color:var(--muted)}
+  .prop-row{display:flex;gap:16px;margin-top:10px;flex-wrap:wrap}
+  .prop-row span{font-size:11px;color:var(--muted);display:inline-flex;align-items:center;gap:5px}
+  .prop-row span::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--green);opacity:.5}
+
+  /* social proof */
+  .proof{border-top:1px solid var(--line2);border-bottom:1px solid var(--line2);padding-block:30px}
+  .proof-row{display:flex;align-items:center;gap:40px;flex-wrap:wrap}
+  .stat b{font-size:22px;font-weight:800}
+  .stat span{font-size:13px;color:var(--muted);margin-left:6px}
+  .logos{display:flex;align-items:center;gap:34px;flex-wrap:wrap;margin-left:auto;opacity:.75}
+  .logos .ph{height:12px;width:72px;border-radius:3px;background:#cfd2d1}
+  .logos .ph:nth-child(2){width:54px}.logos .ph:nth-child(3){width:64px}
+  .logos .ph:nth-child(4){width:78px}.logos .ph:nth-child(5){width:60px}.logos .ph:nth-child(6){width:70px}
+  .proof .lbl{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);width:100%;margin-bottom:12px}
+
+  /* taught by */
+  .people{display:flex;gap:40px;flex-wrap:wrap;margin-top:28px}
+  .person{display:flex;gap:14px;align-items:center}
+  .avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#3a5f58,#1d3b39);flex:none}
+  .person .r{font-size:14.5px;font-weight:700}
+  .person .d{font-size:13px;color:var(--muted)}
+  .person .ln{font-size:13px;color:var(--green);font-weight:600;text-decoration:none}
+  .person .ln:hover{text-decoration:underline}
+
+  /* three cards */
+  .cards3{display:grid;grid-template-columns:1.15fr 1fr 1fr;gap:18px;margin-top:40px}
+  @media(max-width:860px){.cards3{grid-template-columns:1fr}}
+  .fcard{border:1px solid var(--line2);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;background:#fff}
+  .fcard .top{position:relative;min-height:220px;background:linear-gradient(145deg,#2f574f,#16302b)}
+  .fcard .top img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .fcard .cap{position:absolute;left:18px;right:18px;bottom:16px;color:#fff}
+  .fcard .cap .k{font-size:12px;font-weight:600;opacity:.85;display:flex;align-items:center;gap:6px}
+  .fcard .cap h3{font-size:18px;margin-top:6px;letter-spacing:-.01em}
+  .fcard .cap p{font-size:13px;opacity:.9;margin-top:6px;line-height:1.45}
+  .fcard.light .body{padding:20px}
+  .fcard.light h3{font-size:18px}
+  .fcard.light .desc{font-size:13.5px;color:var(--muted);margin-top:8px}
+  .mini{border:1px solid var(--line2);border-radius:10px;padding:12px;margin-bottom:12px;background:var(--grey)}
+  .mini .mk{font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--green)}
+  .mini .mt{font-size:13px;font-weight:600;margin-top:3px}
+  .mini .barrow{height:7px;border-radius:4px;background:#dfe3e1;margin-top:8px}
+  .mini .barrow.s{width:60%}
+  .platform{background:#eef2f0;border:1px solid var(--line2);border-radius:10px;padding:10px;margin-bottom:12px}
+  .platform .prow{display:flex;align-items:center;gap:8px;padding:6px 4px;border-bottom:1px solid #e2e7e5}
+  .platform .prow:last-child{border-bottom:0}
+  .platform .prow .sq{width:16px;height:16px;border-radius:4px;background:#c9d3cf;flex:none}
+  .platform .prow .ln1{height:7px;border-radius:3px;background:#d4dad7;flex:1}
+  .platform .prow .ln2{height:7px;width:40px;border-radius:3px;background:#dfe3e1}
+
+  /* band sections */
+  .band-cream{background:var(--cream)}
+  .band-deep{background:var(--deep);color:#fff}
+  .band-deep .lead,.band-deep .muted{color:#b9c6c2}
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+  @media(max-width:860px){.split{grid-template-columns:1fr;gap:32px}}
+  .feat{display:flex;flex-direction:column;gap:22px}
+  .feat .f .ft{font-size:16px;font-weight:700}
+  .feat .f .fd{font-size:14px;color:var(--muted);margin-top:4px}
+  .band-deep .feat .f .fd{color:#9fb0ab}
+  .price{font-size:13px;color:var(--muted);margin-top:18px}
+  .price b{color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:6px;padding:1px 7px;font-weight:700}
+  .band-deep .price b{color:#fff;background:#20463f;border-color:#2c5750}
+  .listcols{display:grid;grid-template-columns:1fr 1fr;gap:6px 24px;margin:14px 0 0}
+  .listcols li{list-style:none;font-size:14.5px;padding:6px 0;color:#d7e0dd}
+  .callbox{background:#10272326;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:16px;padding:22px}
+  .callbox h3{font-size:19px;letter-spacing:-.01em}
+  .callbox p{font-size:14px;color:#b9c6c2;margin:8px 0 16px}
+  .mock{background:#0e231f;border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:10px;margin-bottom:16px}
+  .mock .mrow{display:flex;align-items:center;gap:8px;padding:6px 4px;border-bottom:1px solid rgba(255,255,255,.07)}
+  .mock .mrow:last-child{border-bottom:0}
+  .mock .mrow .sq{width:16px;height:16px;border-radius:4px;background:#2c5750;flex:none}
+  .mock .mrow .l{height:6px;border-radius:3px;background:#24463f;flex:1}
+  .mock .mrow .l2{height:6px;width:38px;border-radius:3px;background:#1d3b36}
+
+  /* checklist */
+  .checklist{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+  @media(max-width:720px){.checklist{grid-template-columns:1fr;gap:20px}}
+  .checklist h2{font-size:clamp(22px,3vw,28px)}
+  .form-inline{display:flex;gap:10px;flex-wrap:wrap}
+  .form-inline input{flex:1;min-width:200px;font-family:var(--sans);font-size:15px;padding:13px 14px;border:1px solid var(--line2);border-radius:12px;background:#fff}
+  .form-inline input:focus{outline:2px solid var(--green);outline-offset:1px;border-color:var(--green)}
+  .ok-msg{color:var(--green);font-weight:600;font-size:14px;margin-top:10px}
+
+  /* FAQ */
+  .faqwrap{display:grid;grid-template-columns:.9fr 1.3fr;gap:40px}
+  @media(max-width:720px){.faqwrap{grid-template-columns:1fr;gap:16px}}
+  .faq h2{font-size:clamp(28px,4vw,40px)}
+  .faq-item{border-top:1px solid var(--line2)}
+  .faq-item:last-child{border-bottom:1px solid var(--line2)}
+  .faq-q{width:100%;text-align:left;background:none;border:0;cursor:pointer;font-family:var(--sans);
+    font-size:16px;font-weight:600;color:var(--ink);padding:18px 0;display:flex;justify-content:space-between;gap:16px;align-items:center}
+  .faq-q .pm{font-size:20px;color:var(--muted);flex:none;transition:transform .2s}
+  .faq-item.open .faq-q .pm{transform:rotate(45deg)}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .25s ease}
+  .faq-a p{font-size:15px;color:var(--muted);padding:0 0 18px;max-width:60ch}
+
+  /* final cta */
+  .finalcta{background:var(--cream);border-radius:20px;padding:56px;text-align:left;margin-block:16px}
+  @media(max-width:720px){.finalcta{padding:32px}}
+  .finalcta h2{font-size:clamp(28px,4vw,40px)}
+  .finalcta .cta-note{margin:8px 0 20px}
+
+  footer{border-top:1px solid var(--line2);padding-block:28px}
+  .foot{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;
+    font-size:13px;color:var(--muted)}
+  .foot .fbrand{display:flex;align-items:center;gap:8px}
+
+  /* modals */
+  .overlay{position:fixed;inset:0;background:rgba(10,20,18,.5);backdrop-filter:blur(2px);
+    display:none;align-items:center;justify-content:center;padding:20px;z-index:100}
+  .overlay.show{display:flex}
+  .modal{background:#fff;border-radius:16px;width:100%;max-width:440px;max-height:90vh;overflow:auto;
+    box-shadow:0 20px 60px rgba(10,20,18,.35);padding:26px}
+  .modal-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:6px}
+  .modal-head h3{font-size:21px;letter-spacing:-.01em}
+  .modal-close{background:var(--grey);border:1px solid var(--line2);border-radius:999px;font-family:var(--sans);
+    font-size:13px;font-weight:600;padding:6px 14px;cursor:pointer;color:var(--ink)}
+  .modal-close:hover{background:#ececec}
+  .step-label{font-size:13px;color:var(--muted);margin:4px 0 16px}
+  .field{margin-bottom:16px}
+  .field label{display:block;font-size:13px;font-weight:600;margin-bottom:6px}
+  .field input,.field select{width:100%;font-family:var(--sans);font-size:15px;padding:12px 13px;
+    border:1px solid var(--line2);border-radius:10px;background:#fff;color:var(--ink)}
+  .field input:focus,.field select:focus{outline:none;border-color:var(--green);box-shadow:0 0 0 2px rgba(40,78,76,.2)}
+  .field.err input,.field.err select{border-color:#c0392b}
+  .field .emsg{display:none;color:#c0392b;font-size:12.5px;margin-top:5px}
+  .field.err .emsg{display:block}
+  .modal-note{font-size:13px;color:var(--muted);margin:2px 0 16px}
+  .modal-actions{display:flex;gap:10px;align-items:center}
+  .radios{display:flex;flex-direction:column;gap:10px;margin-bottom:16px}
+  .radio{display:flex;align-items:center;gap:10px;border:1px solid var(--line2);border-radius:10px;padding:12px 14px;cursor:pointer;font-size:14.5px}
+  .radio input{accent-color:var(--green)}
+  .radio:has(input:checked){border-color:var(--green);box-shadow:0 0 0 1px var(--green) inset}
+  .success-box{background:var(--cream);border-radius:10px;padding:12px 14px;font-size:14px;margin:12px 0 18px}
+  .success-box b{font-weight:700}
+  .spinner{width:15px;height:15px;border:2px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;
+    display:inline-block;animation:spin .7s linear infinite;vertical-align:-2px;margin-right:7px}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  @media(prefers-reduced-motion:reduce){.spinner{animation:none}.faq-a{transition:none}html{scroll-behavior:auto}}
+  .hide{display:none!important}
+</style>
+</head>
+<body>
+
+<div class="protobar">Concept prototype, anonymized. <b>Designed in under 6 hours</b> as a rapid-prototyping challenge. Names, logos and photos are placeholders.</div>
+
+<header class="site">
+  <div class="bar">
+    <div class="logo">Operators <span>Academy</span></div>
+    <nav class="top">
+      <a class="navlink" href="#launch">For operators</a>
+      <a class="btn btn-primary btn-sm" href="#" data-open="webinar">Register for the free webinar</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-row">
+        <div class="hero-copy">
+          <div class="brandlock">
+            <span class="el">From the operators behind</span>
+            <span class="chip-logo"><span class="dot" style="background:#284e4c"></span><span class="ph"></span></span>
+            <span class="el">and</span>
+            <span class="chip-logo"><span class="dot" style="background:#3a7bd5"></span><span class="ph"></span></span>
+          </div>
+          <h1 class="display">Launch and<br>scale your own<br>rental business.</h1>
+          <p class="lead">Learn the playbook, systems and software behind a real short-term rental company, whether you're working toward your first unit or already managing a few.</p>
+          <div>
+            <a class="btn btn-primary" href="#" data-open="webinar">Register for the free webinar</a>
+            <p class="cta-note">Free. [Date], [Duration].</p>
+          </div>
+          <a class="scale-link" href="#scale">Already running a few units? See the Scale programme</a>
+        </div>
+        <div class="hero-media">
+          <img src="https://picsum.photos/seed/operators-loft/1000/820" alt="" loading="eager" width="1000" height="820">
+          <div class="prop-card">
+            <div class="pcl"><span class="m"></span>Platform</div>
+            <h4>Property Features and Amenities</h4>
+            <div class="sub">Layout, sleeping arrangements, and amenities</div>
+            <div class="prop-row"><span>4 bedrooms</span><span>1 bathroom</span><span>2 car garage</span><span>3rd floor</span><span>parking lot</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOCIAL PROOF -->
+  <div class="proof">
+    <div class="wrap proof-row">
+      <div class="stat"><b>7</b><span>cities</span></div>
+      <div class="stat"><b>150+</b><span>businesses</span></div>
+      <div class="logos" aria-hidden="true">
+        <span class="lbl">Operators and partners we've worked with</span>
+        <span class="ph"></span><span class="ph"></span><span class="ph"></span><span class="ph"></span><span class="ph"></span><span class="ph"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAUGHT BY -->
+  <section>
+    <div class="wrap">
+      <h2 style="font-size:clamp(26px,4vw,34px);max-width:16ch">Taught by people who still run the business.</h2>
+      <div class="people">
+        <div class="person">
+          <div class="avatar"></div>
+          <div>
+            <div class="r">Co-founder &amp; CEO</div>
+            <div class="d">Still runs an active rental company</div>
+            <a class="ln" href="#">LinkedIn</a>
+          </div>
+        </div>
+        <div class="person">
+          <div class="avatar" style="background:linear-gradient(135deg,#46726a,#24463f)"></div>
+          <div>
+            <div class="r">Co-founder &amp; COO</div>
+            <div class="d">Runs day-to-day operations</div>
+            <a class="ln" href="#">LinkedIn</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="cards3">
+        <div class="fcard">
+          <div class="top">
+            <img src="https://picsum.photos/seed/operators-team/800/700" alt="" loading="lazy" width="800" height="700">
+            <div class="cap">
+              <div class="k">The playbook</div>
+              <h3>The playbook</h3>
+              <p>How to find, launch and run a unit, in the order the team does it. The same steps took the company from a few flats in 2019 to 7 cities.</p>
+            </div>
+          </div>
+        </div>
+        <div class="fcard light">
+          <div class="body">
+            <div class="mini"><div class="mk">Launch</div><div class="mt">Templates to open your first units</div><div class="barrow"></div><div class="barrow s"></div></div>
+            <div class="mini"><div class="mk">Scale</div><div class="mt">Standard operating procedures</div><div class="barrow"></div><div class="barrow s"></div></div>
+            <h3>The systems</h3>
+            <div class="desc">The templates and procedures the team works from.</div>
+          </div>
+        </div>
+        <div class="fcard light">
+          <div class="body">
+            <div class="platform">
+              <div class="prow"><span class="sq"></span><span class="ln1"></span><span class="ln2"></span></div>
+              <div class="prow"><span class="sq"></span><span class="ln1"></span><span class="ln2"></span></div>
+              <div class="prow"><span class="sq"></span><span class="ln1"></span><span class="ln2"></span></div>
+              <div class="prow"><span class="sq"></span><span class="ln1"></span><span class="ln2"></span></div>
+            </div>
+            <h3>The software</h3>
+            <div class="desc">The platform built to run the business, day to day.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LAUNCH (cream) -->
+  <section class="band-cream" id="launch">
+    <div class="wrap split">
+      <div>
+        <p class="eyebrow">Learn how to launch</p>
+        <h2 style="font-size:clamp(28px,4vw,38px);margin-top:12px;max-width:14ch">A <span style="color:var(--green)">flexible</span> way to open your first units.</h2>
+        <p class="lead" style="margin-top:16px">Built by operators, for people who want to start safely.</p>
+        <p class="price"><b>[X]</b> entry price, to be confirmed</p>
+        <a class="btn btn-primary" style="margin-top:22px" href="#" data-open="webinar">Register for the free webinar</a>
+      </div>
+      <div class="feat">
+        <div class="f"><div class="ft">Self-paced course</div><div class="fd">What the course covers and how long it takes.</div></div>
+        <div class="f"><div class="ft">Live group sessions</div><div class="fd">How often, how long, who hosts.</div></div>
+        <div class="f"><div class="ft">Templates</div><div class="fd">To open your first units.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCALE (deep) -->
+  <section class="band-deep" id="scale">
+    <div class="wrap split">
+      <div>
+        <p class="eyebrow" style="color:#8aa39c">Learn how to scale</p>
+        <h2 style="font-size:clamp(28px,4vw,38px);margin-top:12px;max-width:16ch">Already running a few units? Build the company around them.</h2>
+        <p class="lead" style="margin-top:16px">The programme runs on the same systems and software the team uses across 7 cities.</p>
+        <ul class="listcols">
+          <li>12-week programme</li>
+          <li>Weekly group sessions</li>
+          <li>Monthly 1:1 with a founder</li>
+          <li>Operator community</li>
+          <li>Standard operating procedures</li>
+          <li>Platform access</li>
+        </ul>
+        <p class="price"><b>[Y]</b> premium price, to be confirmed</p>
+      </div>
+      <div class="callbox">
+        <div class="mock">
+          <div class="mrow"><span class="sq"></span><span class="l"></span><span class="l2"></span></div>
+          <div class="mrow"><span class="sq"></span><span class="l"></span><span class="l2"></span></div>
+          <div class="mrow"><span class="sq"></span><span class="l"></span><span class="l2"></span></div>
+          <div class="mrow"><span class="sq"></span><span class="l"></span><span class="l2"></span></div>
+        </div>
+        <h3>A 20 to 30 minute call with the team</h3>
+        <p>Share how many units you run today, your city and your budget band. Then pick a time and get a confirmation.</p>
+        <a class="btn btn-inverse" href="#" data-open="strategy">Book a free strategy call</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHECKLIST -->
+  <section>
+    <div class="wrap checklist">
+      <h2>Not ready to talk? Get the free STR scaling checklist.</h2>
+      <div>
+        <form class="form-inline" id="checklistForm" novalidate>
+          <input type="email" name="email" placeholder="jamie@example.com" aria-label="Email" autocomplete="email" required>
+          <button class="btn btn-ghost" type="submit">Send me the checklist</button>
+        </form>
+        <p class="ok-msg hide" id="checklistOk">Sent. Check your inbox for the checklist.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq">
+    <div class="wrap faqwrap">
+      <h2>Questions.</h2>
+      <div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">How much time do I need each week?<span class="pm">+</span></button>
+          <div class="faq-a"><p>A few focused hours. The course is self-paced, with optional live sessions you can join when they fit your week.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">How is this different from free videos?<span class="pm">+</span></button>
+          <div class="faq-a"><p>It is the actual playbook, templates and software an operating company uses, in the order they use them, with people who still run the business.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">Does it work in my country?<span class="pm">+</span></button>
+          <div class="faq-a"><p>The systems are built to adapt. Local rules differ, so part of the programme is working out what applies where you operate.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">Should I start with Launch or Scale?<span class="pm">+</span></button>
+          <div class="faq-a"><p>Start with Launch if you are opening your first units. Choose Scale if you already run a few and want to build the company around them.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="finalcta">
+        <h2>Start with the<br>free webinar.</h2>
+        <p class="cta-note">Free. [Date], [Duration].</p>
+        <a class="btn btn-primary" href="#" data-open="webinar">Register for the free webinar</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <div class="logo" style="font-size:16px">Operators <span>Academy</span></div>
+    <div class="fbrand">From the team behind two established rental companies.</div>
+  </div>
+</footer>
+
+<!-- WEBINAR MODAL -->
+<div class="overlay" id="m-webinar" role="dialog" aria-modal="true" aria-label="Register for the free webinar">
+  <div class="modal">
+    <div class="modal-head"><h3>Register for the free webinar</h3><button class="modal-close" data-close>Close</button></div>
+    <div data-screen="form">
+      <form id="webinarForm" novalidate>
+        <div class="field"><label>Name</label><input name="name" autocomplete="name" required><span class="emsg">Enter your name.</span></div>
+        <div class="field"><label>Email</label><input name="email" type="email" autocomplete="email" required><span class="emsg">Enter your email.</span></div>
+        <div class="field"><label>Country</label>
+          <select name="country" required>
+            <option value="">Choose a country</option>
+            <option>United Kingdom</option><option>Italy</option><option>Canada</option><option>United States</option><option>Other</option>
+          </select><span class="emsg">Choose your country.</span>
+        </div>
+        <p class="modal-note">Free. [Date], [Duration].</p>
+        <button class="btn btn-primary" type="submit" style="width:100%">Register for the free webinar</button>
+      </form>
+    </div>
+    <div data-screen="success" class="hide">
+      <p class="modal-note" id="webinarSuccessMsg" style="color:var(--ink)">You're registered. Check your inbox for the link.</p>
+      <div class="success-box"><b>[Date]</b>, [Time and time zone]. [Duration].</div>
+      <div class="modal-actions"><button class="btn btn-primary" data-close>Add to calendar</button><button class="btn btn-ghost" data-close>Done</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- STRATEGY MODAL -->
+<div class="overlay" id="m-strategy" role="dialog" aria-modal="true" aria-label="Book a free strategy call">
+  <div class="modal">
+    <div class="modal-head"><h3>Book a free strategy call</h3><button class="modal-close" data-close>Close</button></div>
+    <div data-screen="step1">
+      <p class="step-label">Step 1 of 2: about your business</p>
+      <form id="strategyStep1" novalidate>
+        <div class="field"><label>Units you run today</label><input name="units" inputmode="numeric" required><span class="emsg">Required.</span></div>
+        <div class="field"><label>Units you want in 12 months</label><input name="target" inputmode="numeric" required><span class="emsg">Required.</span></div>
+        <div class="field"><label>City</label><input name="city" required><span class="emsg">Required.</span></div>
+        <div class="field"><label>Budget band</label>
+          <select name="band" required><option value="">Choose a band</option><option>Band 1</option><option>Band 2</option><option>Band 3</option></select>
+          <span class="emsg">Required.</span>
+        </div>
+        <button class="btn btn-primary" type="submit" style="width:100%">Choose a time</button>
+      </form>
+    </div>
+    <div data-screen="step2" class="hide">
+      <p class="step-label">Step 2 of 2: pick a time</p>
+      <div class="field" style="margin-bottom:8px"><label>Available times</label></div>
+      <div class="radios">
+        <label class="radio"><input type="radio" name="slot" value="[Day 1, time]" checked>[Day 1, time]</label>
+        <label class="radio"><input type="radio" name="slot" value="[Day 2, time]">[Day 2, time]</label>
+        <label class="radio"><input type="radio" name="slot" value="[Day 3, time]">[Day 3, time]</label>
+      </div>
+      <div class="modal-actions">
+        <button class="btn btn-primary" id="strategyConfirm" type="button">Confirm the call</button>
+        <button class="btn btn-ghost" id="strategyBack" type="button">Back</button>
+      </div>
+    </div>
+    <div data-screen="success" class="hide">
+      <p class="modal-note" style="color:var(--ink)">Your call is booked.</p>
+      <div class="success-box"><b id="strategySlot">[Day 1, time]</b>. 20 to 30 minutes with the team.</div>
+      <button class="btn btn-primary" data-close>Done</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  // FAQ
+  document.querySelectorAll('.faq-item').forEach(function(it){
+    var q=it.querySelector('.faq-q'), a=it.querySelector('.faq-a');
+    q.addEventListener('click',function(){
+      var open=it.classList.toggle('open');
+      q.setAttribute('aria-expanded',open?'true':'false');
+      a.style.maxHeight=open?a.scrollHeight+'px':'0px';
+    });
+  });
+  // Checklist
+  var cf=document.getElementById('checklistForm');
+  cf.addEventListener('submit',function(e){e.preventDefault();
+    var em=cf.email; if(!em.value||!/.+@.+\..+/.test(em.value)){em.focus();em.style.borderColor='#c0392b';return;}
+    document.getElementById('checklistOk').classList.remove('hide'); cf.classList.add('hide');
+  });
+  // Modal open/close
+  var lastFocus=null;
+  function openM(id){var o=document.getElementById('m-'+id);if(!o)return;lastFocus=document.activeElement;resetModal(id);o.classList.add('show');var f=o.querySelector('input,select,button');if(f)f.focus();}
+  function closeM(o){o.classList.remove('show');if(lastFocus)lastFocus.focus();}
+  document.querySelectorAll('[data-open]').forEach(function(b){b.addEventListener('click',function(e){e.preventDefault();openM(b.getAttribute('data-open'));});});
+  document.querySelectorAll('.overlay').forEach(function(o){
+    o.addEventListener('click',function(e){if(e.target===o)closeM(o);});
+    o.querySelectorAll('[data-close]').forEach(function(c){c.addEventListener('click',function(){closeM(o);});});
+  });
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'){var s=document.querySelector('.overlay.show');if(s)closeM(s);}});
+  function show(o,name){o.querySelectorAll('[data-screen]').forEach(function(s){s.classList.toggle('hide',s.getAttribute('data-screen')!==name);});}
+  function resetModal(id){
+    var o=document.getElementById('m-'+id);
+    o.querySelectorAll('.field').forEach(function(f){f.classList.remove('err');});
+    o.querySelectorAll('form').forEach(function(fm){fm.reset();});
+    if(id==='webinar'){show(o,'form');}
+    if(id==='strategy'){show(o,'step1');}
+  }
+  function validate(form){var ok=true;form.querySelectorAll('[required]').forEach(function(inp){
+    var f=inp.closest('.field');var bad=!inp.value|| (inp.type==='email'&&!/.+@.+\..+/.test(inp.value));
+    if(f)f.classList.toggle('err',bad);if(bad)ok=false;});return ok;}
+  function loadBtn(btn,txt){var o=btn.innerHTML;btn.disabled=true;btn.innerHTML='<span class="spinner"></span>'+txt;return function(){btn.disabled=false;btn.innerHTML=o;};}
+  // Webinar submit
+  var wf=document.getElementById('webinarForm');
+  wf.addEventListener('submit',function(e){e.preventDefault();if(!validate(wf))return;
+    var btn=wf.querySelector('button[type=submit]');var done=loadBtn(btn,'Registering...');
+    var email=wf.email.value;
+    setTimeout(function(){done();var o=document.getElementById('m-webinar');
+      document.getElementById('webinarSuccessMsg').textContent="You're registered. Check "+email+" for the link.";
+      show(o,'success');},900);
+  });
+  // Strategy step1 -> step2
+  var s1=document.getElementById('strategyStep1');
+  s1.addEventListener('submit',function(e){e.preventDefault();if(!validate(s1))return;
+    show(document.getElementById('m-strategy'),'step2');});
+  document.getElementById('strategyBack').addEventListener('click',function(){show(document.getElementById('m-strategy'),'step1');});
+  document.getElementById('strategyConfirm').addEventListener('click',function(){
+    var btn=this;var done=loadBtn(btn,'Booking...');
+    var slot=document.querySelector('#m-strategy input[name=slot]:checked').value;
+    setTimeout(function(){done();document.getElementById('strategySlot').textContent=slot;
+      show(document.getElementById('m-strategy'),'success');},900);
+  });
+})();
+</script>
+</body>
+</html>
